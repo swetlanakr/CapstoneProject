@@ -25,6 +25,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
+            return 1
             python3 -m venv venv
             . venv/bin/activate
             make install
