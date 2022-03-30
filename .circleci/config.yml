@@ -50,10 +50,10 @@ jobs:
           name: Build, tag and push docker image to docker.io
           command: |
             docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PWD}
-            docker build -t proj4mlmicroservice/proj5-capstone:${CIRCLE_WORKFLOW_ID:0:7} .
-            docker push proj4mlmicroservice/proj5-capstone:${CIRCLE_WORKFLOW_ID:0:7}
-            docker tag proj4mlmicroservice/proj5-capstone:${CIRCLE_WORKFLOW_ID:0:7} proj4mlmicroservice/proj5-capstone:latest
-            docker push proj4mlmicroservice/proj5-capstone:latest
+            docker build -t swetlana/capstoneproject:${CIRCLE_WORKFLOW_ID:0:7} .
+            docker push swetlana/capstoneproject:${CIRCLE_WORKFLOW_ID:0:7}
+            docker tag swetlana/capstoneproject:${CIRCLE_WORKFLOW_ID:0:7} swetlana/capstoneproject:latest
+            docker push swetlana/capstoneproject:latest
 
   create-deployment:
     executor: aws-eks/python3
@@ -71,7 +71,7 @@ jobs:
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
           resource-file-path: deployment.yml
-          resource-name: deployment/proj5-capstone1
+          resource-name: deployment/capstoneproject
 
   test-cluster:
     executor: aws-eks/python3
@@ -100,13 +100,13 @@ workflows:
           requires:
             - lint
       - aws-eks/create-cluster:
-          cluster-name: proj5-capstone1
+          cluster-name: capstoneproject1
       - create-deployment:
-          cluster-name: proj5-capstone1
+          cluster-name: capstoneproject1
           requires:
             - aws-eks/create-cluster
       - test-cluster:
-          cluster-name: proj5-capstone1
+          cluster-name: capstoneproject1
           requires:
             - create-deployment
       #- aws-eks/delete-cluster:
