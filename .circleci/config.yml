@@ -25,7 +25,6 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            return 1
             python3 -m venv venv
             . venv/bin/activate
             make install
@@ -62,7 +61,7 @@ jobs:
     parameters:
       cluster-name:
         description: |
-          capstoneproject1
+          capstoneproject11
         type: string
     steps:
       - checkout
@@ -103,15 +102,15 @@ workflows:
           requires:
             - lint
       - aws-eks/create-cluster:
-          cluster-name: capstoneproject1
+          cluster-name: capstoneproject11
           requires:
             - lint
       - create-deployment:
-          cluster-name: capstoneproject1
+          cluster-name: capstoneproject11
           requires:
             - aws-eks/create-cluster
       - test-cluster:
-          cluster-name: capstoneproject1
+          cluster-name: capstoneproject11
           requires:
             - create-deployment
       #- aws-eks/delete-cluster:
