@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  aws-eks: circleci/aws-eks@<<pipeline.parameters.dev-orb-version>>
+  aws-eks: circleci/aws-eks@2.1.1
   kubernetes: circleci/kubernetes@1.3
 
 
