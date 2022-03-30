@@ -104,6 +104,8 @@ workflows:
             - lint
       - aws-eks/create-cluster:
           cluster-name: capstoneproject1
+          requires:
+            - lint
       - create-deployment:
           cluster-name: capstoneproject1
           requires:
