@@ -61,7 +61,7 @@ jobs:
     parameters:
       cluster-name:
         description: |
-          capstoneproject11
+          capstoneproject_a
         type: string
     steps:
       - checkout
@@ -72,7 +72,7 @@ jobs:
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
           resource-file-path: deployment.yml
-          resource-name: deployment/capstoneproject1
+          resource-name: deployment/capstoneprojecta
 
   test-cluster:
     docker:
@@ -80,7 +80,7 @@ jobs:
     parameters:
       cluster-name:
         description: |
-          proj5-capstone1
+          capstoneprojecta
         type: string
     steps:
       - kubernetes/install
@@ -102,18 +102,18 @@ workflows:
           requires:
             - lint
       - aws-eks/create-cluster:
-          cluster-name: capstoneproject11
+          cluster-name: capstoneprojecta
           requires:
             - lint
       - create-deployment:
-          cluster-name: capstoneproject11
+          cluster-name: capstoneprojecta
           requires:
             - aws-eks/create-cluster
       - test-cluster:
-          cluster-name: capstoneproject11
+          cluster-name: capstoneprojecta
           requires:
             - create-deployment
       #- aws-eks/delete-cluster:
-       #   cluster-name: proj5-capstone1
+       #   cluster-name: capstoneproject1
         #  requires:
          #   - test-cluster
